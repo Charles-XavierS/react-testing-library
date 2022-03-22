@@ -11,7 +11,7 @@ describe('Teste se o topo da aplicação contém um conjunto fixo de links de na
     + 'na URL / ao clicar no link Home da barra de navegação.',
     () => {
       const { history } = renderWithRouter(<App />);
-      const linkToHome = screen.getByRole('link', { name: 'Home' });
+      const linkToHome = screen.getByRole('link', { name: /Home/i });
       expect(linkToHome).toBeDefined();
 
       userEvent.click(linkToHome);
@@ -23,7 +23,7 @@ describe('Teste se o topo da aplicação contém um conjunto fixo de links de na
     + 'ao clicar no link About da barra de navegação.',
     () => {
       const { history } = renderWithRouter(<App />);
-      const linkToAbout = screen.getByRole('link', { name: 'About' });
+      const linkToAbout = screen.getByRole('link', { name: /About/i });
       expect(linkToAbout).toBeDefined();
 
       userEvent.click(linkToAbout);
@@ -35,7 +35,7 @@ describe('Teste se o topo da aplicação contém um conjunto fixo de links de na
     + 'na URL /favorites, ao clicar no link Favorite Pokémons da barra de navegação.',
     () => {
       const { history } = renderWithRouter(<App />);
-      const linkToFavorites = screen.getByRole('link', { name: 'Favorite Pokémons' });
+      const linkToFavorites = screen.getByRole('link', { name: /Favorite Pokémons/i });
       expect(linkToFavorites).toBeDefined();
 
       userEvent.click(linkToFavorites);
@@ -50,8 +50,8 @@ describe('Teste se o topo da aplicação contém um conjunto fixo de links de na
 
       history.push('/page-not-found');
       const title = screen.getByRole('heading', {
-        name: 'Page requested not found Crying emoji',
+        name: /Page requested not found Crying emoji/i,
         level: 2 });
-      expect(title).toBeDefined();
+      expect(title).toBeInTheDocument();
     });
   });
